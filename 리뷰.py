@@ -1,18 +1,16 @@
 # 001 함수만들기
 # 함수 add는 매개변수로 a와 b를 받고 있습니다. 코드의 3번째 줄을 수정해서 result에 a와 b를 더한 값을 저장하고 출력되도록 만들어 보세요.
 
-# def add(a,b):
-#   a=input("첫 번째 숫자 입력>>")
-#   b=input("두번째 숫자 입력 >>")
-#   result=a+b
-#   print("{} + {} = {}".format(a,b,result))
-# add(10,5)
+def add(a,b):
+  result=a+b
+  print("{} + {} = {}".format(a,b,result))
+add(10,5)
 
 # #002 함수의 리턴
 # # 매개변수로 변수 a와 b를 받는 함수 add를 정의하고 a와 b를 더한 값을 return해 보세요.
-# def result(a,b):
-#   return a+b
-# print(add(10,5))
+def add(a,b):
+  return a + b
+print(add(10,5))
 
 # 003 List 리스트
 # 리스트는 여러개의 값을 담을 수 있는 변수입니다.
@@ -81,9 +79,11 @@ print(dict)
 # 2월이라는 이름표가 가지는 값을 29로 수정해 보세요.
 days_in_month = {
   '1월':'31일',
-  '2월':'29일',
+  '2월':'28일',
   '3월':'31일'
 }
+days_in_month["2월"]="29일"
+
 print(days_in_month)
 
 # 011 딕셔너리 삭제하기
@@ -150,7 +150,8 @@ print(list1[4])
 days = [31,29,31,30,31,30,31,31,30,31,30,31]
 
 for idx, val in enumerate(days):
-  print('{}월의 날짜수는 {}일 입니다. '.format(idx,val))
+ 
+  print('{}월의 날짜수는 {}일 입니다. '.format(idx+1,val))
 
 # 020 정수와 실수 
 # 변수 div를 선언하고, 변수 a를 b로 나눈 몫을 값으로 가지도록 계산해 보세요.
@@ -160,7 +161,7 @@ div = int(a/b)
 print("a를 b로 나눈 몫은 {}입니다.".format(div))
 
 # 21 while문 실습
-# length 변수를 이용ㅇ해서 한 줄씩 출력
+# length 변수를 이용해서 한 줄씩 출력
 numbers = [1,2,3]
 length = len(numbers)
 i = 0
@@ -181,8 +182,110 @@ for i, size in enumerate(sizes):
 # 023 예외 try except
 # 다음 코드는 3을 0으로 나누고 있습니다.
 # 나눗셈 연산은 0으로 나눌 수 엇기 때문에 문제의 코드를 실행하면 에러가 발생합니다. 에러의 이름을 확인하고 try except문으로 줄을 감싸서 에러가 발생할 경우 print문이 출력되도록 만들어 보세요.
-def div10(0):
-  try:
-    return
-a = 3/0
-print("0으로 나눌 수 없습니다.")
+try:
+  a=3/0
+except Exception:
+   print("0으로 나눌 수 없습니다.")
+
+
+# 024 예외의 이름을 알고싶을때
+# 예외의 이름을 모르는 경우에는 Exception as를 통해 해결할 수 있습니다.
+# 어떤 에러가 발생하는지 출력할 수 있도록 빈칸을 채우고, 예외를 출력할 수 있도록 format의 빈칸을 작성하세요
+
+try:
+  a=5
+  b=0
+  c=a/b
+except Exception as ex:
+  print("다음과 같은 에러가 발생했습니다: {}".format(ex))
+
+# 025 딕셔너리 중복
+# 다음 코드는 문구점 3곳을 검사하면서 풀이 있으면 문구점의 이름과 가격을 출력합니다.
+shops = {
+  "송일문방구":{"가위":500,"크레파스":3000},
+  "알파문구":{"풀":800,"도화지":300,"A4용지":8000},
+  "다이소":{"풀":500,"목공본드":2000,"화분":3000}
+}
+
+for shop, products in shops.items():
+  for product, price in products.items():
+    if product=='풀':
+      print("{}: {}원".format(shop,price))
+
+# 026 bool 논리 연산
+# 다음중 어떤 if코드가 실행되는지 확인하시오.
+if []:
+  print("[]은 True입니다.")
+
+if [1,2,3]:
+  print("[1,2,3]은/는 True입니다.")
+
+if{}:
+  print("{}은 True입니다.")
+
+if{'abc':1}:
+  print("{'abc':1}은 True입니다.")
+
+if 0:
+  print("0은/는 True입니다.")
+
+if 1:
+  print("1은 True입니다.")
+
+
+# 027 논리연산자 or
+# or 연산의 결과는 앞의 값이 True이면 앞의 값을,
+# 앞의 값이 False이면 뒤의 값을 따릅니다.
+# 다음 코드를 실행해서 각각 a와 b에 어떤 값이 들어가는지 확인해 보세요.
+
+a = 1 or 10 # 1의 bool 값은 True입니다.
+b = 0 or 10 # 10의 bool 값은 False입니다.
+
+print("a:{}, b:{}".format(a,b))
+
+# 028 리스트 실습
+# list1의 1번째 자리에 8을 넣고 원래 있던 값은 오른쪽으로밀어 보세요.
+list1 = [1,2,3,4]
+list1.insert(1,8)
+print("첫 번째 자리에 8을 넣은 결과 : {}".format(list1))
+
+# list1을 작은 수부터 큰 수로 정렬해 보세요
+list1.sort()
+print("list1을 작은 수부터 큰 수로 정렬한 결과 : {}".format(list1))
+
+# 아래줄에서 list1을 거꾸로 만들어 보세요
+list1.reverse()
+print("list1을 거꾸로 정렬한 결과 : {}".format(list1))
+
+# 029 문자열과 리스트
+str ="10:35:27"
+list = str.split(":")
+new_str=":".join(list)
+print(list)
+print(new_str)
+
+str = "오늘은 날씨가 흐림"
+# split()을 이용해서 str을 공백으로나눈 문자열을 words에 저장해세요
+words = str.split()
+
+# index()를 이용해서 "흐림"이 words의 몇번째에 있는지 찾고, 
+# position에 저장해세요
+position = words.index('흐림')
+
+words[position] = "맑음" # 흐림을 맑음으로 수정
+
+# join()을 이용해서 words를 다시 문자열로 바꿔 new_str에 저장하세요.
+# words를 문자열로 바꿀때는 공백 한 칸을 기준으로 붙이면 됩니다.
+new_str="".join(words)
+print(new_str)
+
+# 030 리스트 slice 
+# slicing - 리스트나 문자열에서 여러개의 값을 가져오는 기능입니다.
+rainbow = ["빨","주","노","초","파","남","보"] 
+# red_colors가 ["빨","주","노"]의 값을 가지도록 rainbow를 slice 하세요
+red_colors = rainbow[0:3]
+# blue_colors가 ["파","남","보"]의 값을 가지도록 rainbow를 slice하세요
+blue_colors = rainbow[4:]
+print("red_colors의 값 : {}".format(red_colors))
+print("blue_colors의 값 : {}".format(blue_colors))
+
